@@ -223,7 +223,7 @@ while True:
         showTurtles()
         moveEnemiesDown(round(z))
         checkForMoveUp()
-        playerMovement(round(z / 2) + 5)
+        playerMovement(round(z / 2) + 3)
         h = checkForCollision()
         if h == 1:
             death()
