@@ -238,3 +238,5 @@ while True:
             screen.update()
         except:
             pass
+    if closed == 1:
+        break
