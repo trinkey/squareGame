@@ -1,5 +1,7 @@
 import turtle, random, time
 
+closed = 0
+
 def reset():
     global left, right, up, down, h, z, score
 
@@ -160,10 +162,10 @@ def playerMovement(speed):
     if down == 1:player.goto(player.xcor() - speed, player.ycor())
     if left == 1:player.goto(player.xcor(), player.ycor() - speed)
     if right == 1:player.goto(player.xcor(), player.ycor() + speed)
-    if player.xcor() > 300:player.goto(300, player.ycor())
+    if player.xcor() > 290:player.goto(290, player.ycor())
     if player.xcor() < -300:player.goto(-300, player.ycor())
     if player.ycor() > 300:player.goto(player.xcor(), 300)
-    if player.ycor() < -300:player.goto(player.xcor(), -300)
+    if player.ycor() < -290:player.goto(player.xcor(), -290)
 
 def playerRight():
     global up
@@ -192,6 +194,8 @@ def playerUpR():
     right = 0
 
 def die():
+    global closed
+    closed = 1
     screen.bye()
 
 def death():
@@ -271,6 +275,8 @@ while True:
         z += 0.01
     while h == 1:
         time.sleep(1 / 20)
+        if closed == 1:
+            break
         try:
             screen.update()
         except:
