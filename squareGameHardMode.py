@@ -1,6 +1,6 @@
-# NOTE - You LEFT CLICK to play, not arrow keys/wasd
-
 import turtle, random, time
+
+closed = 0
 
 def reset():
     global left, right, up, down, h, z, score, direction
@@ -162,10 +162,12 @@ def playerMovement(speed):
     global direction
     if direction == 0:player.goto(player.xcor() + speed, player.ycor())
     else:player.goto(player.xcor() - speed, player.ycor())
-    if player.xcor() > 300:player.goto(300, player.ycor())
+    if player.xcor() > 290:player.goto(290, player.ycor())
     if player.xcor() < -300:player.goto(-300, player.ycor())
 
 def die():
+    global closed
+    closed = 1
     screen.bye()
 
 def death():
@@ -230,6 +232,8 @@ while True:
         z += 0.01
     while h == 1:
         time.sleep(1 / 20)
+        if closed == 1:
+            break
         try:
             screen.update()
         except:
