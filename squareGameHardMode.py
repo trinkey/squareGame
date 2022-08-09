@@ -11,7 +11,7 @@ def reset():
 
     player.speed(0)
     player.shape("square")
-    player.color("lime")
+    player.color("#00ff00")
     player.pu()
     player.goto(0, -250)
     player.shapesize(2, 2, None)
@@ -159,11 +159,10 @@ def checkForCollision():
     else:return 0
 
 def playerMovement(speed):
-    global direction
+    global direction, h
     if direction == 0:player.goto(player.xcor() + speed, player.ycor())
     else:player.goto(player.xcor() - speed, player.ycor())
-    if player.xcor() > 290:player.goto(290, player.ycor())
-    if player.xcor() < -300:player.goto(-300, player.ycor())
+    if player.xcor() > 290 or player.xcor() < -300: h = True
 
 def die():
     global closed
@@ -224,21 +223,18 @@ while True:
         moveEnemiesDown(round(z))
         checkForMoveUp()
         playerMovement(round(z / 2) + 3)
-        h = checkForCollision()
-        if h == 1:
-            death()
-        if direction == 0: player.color("lime")
-        else: player.color("green")
+        if h == True: death()
+        else:
+            h = checkForCollision()
+            if h == True: death()
+        if direction == 0: player.color("#00ff00")
+        else: player.color("#00ff77")
         screen.update()
         time.sleep(1 / 60)
         z += 0.01
-    while h == 1:
+    while h == True:
         time.sleep(1 / 20)
-        if closed == 1:
-            break
-        try:
-            screen.update()
-        except:
-            pass
-    if closed == 1:
-        break
+        if closed == 1: break
+        try: screen.update()
+        except: pass
+    if closed == 1: break
