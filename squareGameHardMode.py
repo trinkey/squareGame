@@ -7,6 +7,7 @@ def reset():
 
     screen.onclick(changeDir)
     screen.onkey(None, "r")
+    screen.onkey(changeDir, "space")
 
     player.speed(0)
     player.shape("square")
@@ -158,7 +159,6 @@ def checkForCollision():
     else:return 0
 
 def playerMovement(speed):
-    global direx
     global direction
     if direction == 0:player.goto(player.xcor() + speed, player.ycor())
     else:player.goto(player.xcor() - speed, player.ycor())
@@ -227,6 +227,8 @@ while True:
         h = checkForCollision()
         if h == 1:
             death()
+        if direction == 0: player.color("lime")
+        else: player.color("green")
         screen.update()
         time.sleep(1 / 60)
         z += 0.01
